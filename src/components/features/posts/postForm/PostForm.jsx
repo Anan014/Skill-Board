@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Segment, Header, Form, Button, TextArea } from 'semantic-ui-react';
+import { Segment, Header, Form, Button, TextArea, Input } from 'semantic-ui-react';
 import cuid from 'cuid';
 
 export default function PostForm({ editPost, editPostObj, createPost }) {
 
-    const createPostValues = {
-        postWantHelpSkill: [
+    // const createPostValues = {
+    //     // postWantHelpSkill: [],
+    //     // postTeachSkill: [],
+    //     // postId: Date.now(),
+    //     userId: 2,
+    //     title:'',
+    //     description:''
+    // }
 
-        ],
-        postTeachSkill: [
-
-        ],
-        postId: Date.now(),
-        userId: 2
-    }
-
-    const [postValues, setPostValues] = useState(createPostValues);
-
+    const [postValues, setPostValues] = useState({
+        // postWantHelpSkill: [],
+        // postTeachSkill: [],
+        // postId: Date.now(),
+        userId: 2,
+        title: '',
+        description: '',
+        createdAt:''
+    });
 
     function handleFormSubmit() {
         const time = (new Date(Date.now())).toISOString();
@@ -35,7 +40,7 @@ export default function PostForm({ editPost, editPostObj, createPost }) {
             <Header content='Create new post' />
             <Form onSubmit={handleFormSubmit}>
                 <Form.Field>
-                    <input
+                    <Input
                         type='text'
                         placeholder='Post title'
                         name='title'

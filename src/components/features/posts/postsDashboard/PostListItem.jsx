@@ -1,15 +1,12 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 import { Button, Icon, Input, Item, Segment, TextArea } from 'semantic-ui-react';
 
 export default function PostListItem({ post, users, deletepost, editPost }) {
-    const initialValues = {
-        title: post.title,
-        description: post.description,
-    };
 
     const [editButtonClicked, setEditButtonClicked] = useState(false);
-    const [values, setValues] = useState(initialValues);
+    const [values, setValues] = useState(post);
 
 
     function formatDate(string) {
@@ -21,6 +18,13 @@ export default function PostListItem({ post, users, deletepost, editPost }) {
         const { name, value } = e.target;
         setValues({ ...values, [name]: value })
         // editPost(values);
+    }
+
+    async function handleEditPost() {
+        const apiResponse = await axios.put(`https://6182357a84c2020017d89d16.mockapi.io/users/${post.userId}/Posts/${post.postId}`, values)
+        if (apiResponse.status === 200) {
+            setEditButtonClicked(!editButtonClicked)
+        }
     }
 
     return (
@@ -77,13 +81,16 @@ export default function PostListItem({ post, users, deletepost, editPost }) {
             </Segment>
             <Segment secondary clearing>
                 <Button
-                    onClick={() => deletepost(post.postId)}
+                    onClick={() => deletepost(post)}
                     color='red'
                     floated='right'
                     content='Delete'
                 />
                 <Button
-                    onClick={() => setEditButtonClicked(!editButtonClicked)}
+                    onClick={() => {
+
+                        handleEditPost()
+                    }}
                     // as={Link} to={`/posts/${post.id}`}
                     color='teal'
                     floated='right'

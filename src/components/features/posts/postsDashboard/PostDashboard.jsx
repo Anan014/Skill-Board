@@ -4,6 +4,7 @@ import { Grid } from 'semantic-ui-react';
 import PostForm from '../postForm/PostForm';
 import PostList from './PostList';
 import cuid from 'cuid';
+import { useHistory } from 'react-router';
 
 export default function PostDashboard() {
     const [users, setUsers] = useState(null);
@@ -11,6 +12,7 @@ export default function PostDashboard() {
     const [createPost, setCreatePost] = useState(null);
     const [posts, setPosts] = useState([]);
     const [editPostObj, setEditPostObj] = useState(null);
+    const history = useHistory()
 
     const skillsArray = ['android', 'angular', 'css3', 'cuttlefish', 'gulp', 'js', 'laravel', 'less', 'node js', 'npm'];
 
@@ -51,22 +53,26 @@ export default function PostDashboard() {
         console.log(editPostObj);
     }
 
-    useEffect(() => {
-        console.log(editPostObj);
-    }, [editPostObj])
+    // useEffect(() => {
+    //     console.log(editPostObj);
+    // }, [editPostObj])
 
-    function handleDeletePost(postId) {
-        setPosts(posts.filter(post => post.postId !== postId));
+    async function handleDeletePost(postObj) {
+        const apiRequest = await axios.delete(`https://6182357a84c2020017d89d16.mockapi.io/users/${postObj.userId}/Posts/${postObj.postId}`)
+        if (apiRequest.status === 200) {
+            setPosts(posts.filter(post => post.postId !== postObj.postId));
+        }
     }
 
-    function handleCreatePost(e) {
-        console.log('last post', e);
-        console.log('all posts', posts);
-        let tempPosts = [...posts,e];
-        tempPosts.sort((a, b) => {
-            return new Date(b.createdAt) - new Date(a.createdAt); // ascending
-        });
-        setPosts(tempPosts);
+    async function handleCreatePost(postFromSon) {
+        const apiRequest = await axios.post(`https://6182357a84c2020017d89d16.mockapi.io/users/${postFromSon.userId}/Posts`, postFromSon)
+        if (apiRequest.status === 201) {
+            let tempPosts = [...posts, apiRequest.data];
+            tempPosts.sort((a, b) => {
+                return new Date(b.createdAt) - new Date(a.createdAt); // ascending
+            });
+            setPosts(tempPosts);
+        }
     }
 
 
