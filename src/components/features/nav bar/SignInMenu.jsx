@@ -7,7 +7,7 @@ export default function SignInMenu({signOut}) {
         <>
             <Menu.Item position='right'>
                 <Image avatar spaced='right' src='/assets/user.png' />
-                <Dropdown pointing='top left' text='Bob'>
+                <Dropdown pointing='top right' text='Bob'>
                     <Dropdown.Menu>
                         <Dropdown.Item as={Link} to='/createPost' text='Create Post' icon='plus' />
                         <Dropdown.Item text='My profile' icon='user' />

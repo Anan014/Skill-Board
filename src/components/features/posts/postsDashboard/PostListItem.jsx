@@ -1,24 +1,26 @@
-import React,{useState} from 'react';
+import React, { useState, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
-import { Button, Icon, Item, Segment } from 'semantic-ui-react';
+import { Button, Icon, Input, Item, Segment, TextArea } from 'semantic-ui-react';
 
-export default function PostListItem({ post, users, deletepost,editPost }) {
+export default function PostListItem({ post, users, deletepost, editPost }) {
     const initialValues = {
         title: post.title,
-        category: [],
-        description: [post.description],
-    }
+        description: post.description,
+    };
 
-    // const []
-    const [values,setValues] = useState(initialValues);
+    const [editButtonClicked, setEditButtonClicked] = useState(false);
+    const [values, setValues] = useState(initialValues);
+
 
     function formatDate(string) {
         var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
         return new Date(string).toLocaleDateString([], options);
     }
 
-    function handleinputChange(e){
-
+    function handleinputChange(e) {
+        const { name, value } = e.target;
+        setValues({ ...values, [name]: value })
+        // editPost(values);
     }
 
     return (
@@ -37,9 +39,30 @@ export default function PostListItem({ post, users, deletepost,editPost }) {
                 <Item.Group>
                     <Item>
                         <Item.Content>
-                            <Item.Header content={post.title} />
+                            <Item.Header>
+                                {editButtonClicked ?
+                                    <Input
+                                        type='text'
+                                        placeholder='Event title'
+                                        name='title'
+                                        value={values.title}
+                                        onChange={(e) => handleinputChange(e)}
+                                    />
+                                    :
+                                    values.title}
+                            </Item.Header>
                             <Item.Description>
-                                {post.description}
+                                {editButtonClicked ?
+                                    <TextArea
+                                        style={{ height: '10rem', width: '100%', marginTop: '1rem' }}
+                                        type='text'
+                                        placeholder='Event title'
+                                        name='description'
+                                        value={values.description}
+                                        onChange={(e) => handleinputChange(e)}
+                                    />
+                                    :
+                                    values.description}
                             </Item.Description>
                         </Item.Content>
                     </Item>
@@ -60,11 +83,11 @@ export default function PostListItem({ post, users, deletepost,editPost }) {
                     content='Delete'
                 />
                 <Button
-                    onClick={() => editPost(post.postId)}
+                    onClick={() => setEditButtonClicked(!editButtonClicked)}
                     // as={Link} to={`/posts/${post.id}`}
                     color='teal'
                     floated='right'
-                    content='Edit'
+                    content={editButtonClicked ? 'Done' : 'Edit'}
                 />
             </Segment>
         </Segment.Group>

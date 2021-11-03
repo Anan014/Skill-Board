@@ -1,7 +1,8 @@
+import cuid from 'cuid';
 import React from 'react';
 import PostListItem from './PostListItem';
 
-export default function PostList({ users,editPost,posts,deletepost}) {
+export default function PostList({ users, editPost, posts, deletepost }) {
     // const [posts, setPosts] = useState([])
 
     // useEffect(() => {
@@ -28,7 +29,6 @@ export default function PostList({ users,editPost,posts,deletepost}) {
     // console.log('Posts', posts);
 
 
-
     return (
         <div>
             {posts ?
@@ -36,7 +36,7 @@ export default function PostList({ users,editPost,posts,deletepost}) {
                     <PostListItem
                         users={users}
                         post={post}
-                        key={post.postId}
+                        key={cuid()}
                         deletepost={deletepost}
                         editPost={editPost}
                     />

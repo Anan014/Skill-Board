@@ -11,14 +11,18 @@ import PostForm from '../../features/posts/postForm/PostForm';
 function App() {
   return (
     <>
-      <NavBar />
-      <Container className='main'>
-        <Route exact path='/' component={HomePage} />
-        <Route path='/posts' component={PostDashboard} />
-        <Route path='/postform' component={PostForm} />
-      </Container>
-      {/* anthing that has forwardslash and anything else we eant to render it diffrently */}
-      {/* if we hitting forwardslash and anything else we want to render what is inside this route/ */}
+      <Route exact path='/' component={HomePage} />
+      <Route path={'/(.+)'} render={() => (
+        <>
+          <NavBar />
+          <Container className='main'>
+            <Route path='/posts' component={PostDashboard} />
+            <Route path='/postform' component={PostForm} />
+          </Container>
+        </>
+      )} />
+      {/* anthing that has forwardslash and anything else we want to render it diffrently */}
+      {/* if we hitting forwardslash and anything else we want to render what it inside this route/ */}
     </>
   );
 }
