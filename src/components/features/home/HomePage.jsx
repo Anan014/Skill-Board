@@ -10,7 +10,7 @@ export default function HomePage() {
                     <Icon size='massive' name='clipboard' style={{ marginBottom: 12 }} />
                     Skill Board
                 </Header>
-                <Button as={Link} exact to='/posts' />
+                <Button as={Link} exact to='/posts' content='Login' />
             </Container>
         </Segment>
     );
