@@ -58,12 +58,12 @@ export default function PostForm({ editPost, editPostObj, createPost }) {
                     />
                 </Form.Field>
                 <Button type='submit' floated='right' positive content='Submit' />
-                <Button
+                {/* <Button
                     // as={Link} to='/events'
                     type='submit'
                     floated='right'
                     content='Cancel'
-                />
+                /> */}
             </Form>
         </Segment>
     );
