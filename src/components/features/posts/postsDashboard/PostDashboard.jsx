@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Grid, GridColumn } from 'semantic-ui-react';
 import PostForm from '../postForm/PostForm';
 import PostList from './PostList';
 import cuid from 'cuid';
 import { useHistory } from 'react-router';
+import RightSideBar from '../../rightSideBar/RightSideBar';
+import LeftSideBar from '../../leftSideBar/LeftSideBar';
 
 export default function PostDashboard() {
     const [users, setUsers] = useState(null);
@@ -14,7 +16,16 @@ export default function PostDashboard() {
     const [editPostObj, setEditPostObj] = useState(null);
     const history = useHistory()
 
-    const skillsArray = ['android', 'angular', 'css3', 'cuttlefish', 'gulp', 'js', 'laravel', 'less', 'node js', 'npm'];
+    const skillsArray = [
+        { skill: 'git', icon: 'git' },
+        { skill: 'HTML5', icon: 'html5' },
+        { skill: 'CSS3', icon: 'css3' },
+        { skill: 'SASS', icon: 'sass' },
+        { skill: 'React JS', icon: 'react' },
+        { skill: 'Node JS', icon: 'node js' },
+        { skill: 'Github', icon: 'github' },
+        { skill: 'Wordpress', icon: 'wordpress' },
+    ];
 
     useEffect(() => {
         getUsersData();
@@ -78,13 +89,22 @@ export default function PostDashboard() {
 
     return (
         <Grid>
-            <Grid.Column width={16}>
+            <Grid.Column width={4}>
+            {users ?
+                <LeftSideBar
+                    users={users}
+                    skillsArray={skillsArray}
+                />
+                :
+                'Loading Left sidebar'}
+            </Grid.Column>
+
+            <Grid.Column width={8}>
                 <PostForm
                     selectedPost={handleSelectedPost}
                     editPostObj={editPostObj}
                     createPost={handleCreatePost}
                 />
-                <h2>Posts</h2>
                 {users ?
                     <PostList
                         users={users}
@@ -95,6 +115,16 @@ export default function PostDashboard() {
                     :
                     'Loading...'
                 }
+            </Grid.Column>
+
+            <Grid.Column width={4}>
+                {users ?
+                    <RightSideBar
+                        user={users[0]}
+                        skillsArray={skillsArray}
+                    />
+                    :
+                    'Loading Profile'}
             </Grid.Column>
         </Grid>
     );

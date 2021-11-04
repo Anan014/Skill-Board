@@ -5,7 +5,7 @@ import SignedInMenu from './SignInMenu';
 import SignedOutMenu from './SignOutMenu';
 
 export default function NavBar() {
-    const [authenticated, setAuthenticated] = useState(false);
+    const [authenticated, setAuthenticated] = useState(true);
 
     function handleSignOut() {
         setAuthenticated(false);
