@@ -1,20 +1,20 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Grid, GridColumn } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import PostForm from '../postForm/PostForm';
 import PostList from './PostList';
-import cuid from 'cuid';
-import { useHistory } from 'react-router';
+// import cuid from 'cuid';
+// import { useHistory } from 'react-router';
 import RightSideBar from '../../rightSideBar/RightSideBar';
 import LeftSideBar from '../../leftSideBar/LeftSideBar';
 
 export default function PostDashboard() {
     const [users, setUsers] = useState(null);
-    const [editPost, setEditPost] = useState(null);
-    const [createPost, setCreatePost] = useState(null);
+    // const [editPost, setEditPost] = useState(null);
+    // const [createPost, setCreatePost] = useState(null);
     const [posts, setPosts] = useState([]);
     const [editPostObj, setEditPostObj] = useState(null);
-    const history = useHistory()
+    // const history = useHistory()
 
     const skillsArray = [
         { skill: 'git', icon: 'git' },

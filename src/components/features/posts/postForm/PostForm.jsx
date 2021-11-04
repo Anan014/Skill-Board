@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Segment, Header, Form, Button, TextArea, Input } from 'semantic-ui-react';
-import cuid from 'cuid';
+// import cuid from 'cuid';
 
 export default function PostForm({ editPost, editPostObj, createPost }) {
 

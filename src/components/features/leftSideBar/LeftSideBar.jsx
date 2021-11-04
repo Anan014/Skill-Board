@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Segment, Item, List, Icon, Button, Divider } from 'semantic-ui-react';
+import {Segment, Item, List, Divider } from 'semantic-ui-react';
 
 export default function LeftSideBar({ users, skillsArray }) {
     return (

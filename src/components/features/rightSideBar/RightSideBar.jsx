@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Segment, Item, List, Icon, Button } from 'semantic-ui-react';
+import { Segment, Item, List, Button } from 'semantic-ui-react';
 
 export default function RightSideBar({ user, skillsArray }) {
     return (
